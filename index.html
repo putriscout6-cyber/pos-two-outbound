@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pos 2 - Tanggung Jawab</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background:white;
+    width:90%;
+    max-width:650px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+    text-align:center;
+}
+
+.page{
+    display:none;
+}
+
+.active{
+    display:block;
+}
+
+button{
+    background:#2c3e50;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    margin:8px;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+input{
+    width:90%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+.success{
+    color:green;
+    font-weight:bold;
+}
+
+.error{
+    color:red;
+    font-weight:bold;
+}
+
+.keyword{
+    font-size:34px;
+    font-weight:bold;
+    color:#2c3e50;
+    margin:20px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+<h2>🧭 POS 2</h2>
+
+<p>
+Selamat, penjelajah.
+</p>
+
+<p>
+Kalian telah berhasil menemukan jejak berikutnya.
+</p>
+
+<p>
+Namun perjalanan ini bukan hanya tentang menemukan tujuan.
+</p>
+
+<p>
+Seorang penjelajah yang baik harus mampu memperhatikan lingkungan di sekitarnya.
+</p>
+
+<button onclick="nextPage(2)">Lanjut</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+<h2>👀 CERMATI</h2>
+
+<p>
+Tidak semua jawaban dapat ditemukan dengan terburu-buru.
+</p>
+
+<p>
+Kadang, hal yang paling sederhana justru paling mudah terlewat.
+</p>
+
+<p>
+Sebelum memasuki tantangan Pos 2, kalian harus memperoleh izin terlebih dahulu.
+</p>
+
+<button onclick="nextPage(3)">Masuk ke Pertanyaan</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+<h2>❓ PERTANYAAN IZIN</h2>
+
+<p>
+Berapakah total mesin yang kalian temukan di Pos 1?
+</p>
+
+<input type="text" id="izin" placeholder="Masukkan jawaban">
+
+<br>
+
+<button onclick="cekIzin()">Kirim</button>
+
+<p id="hasilIzin"></p>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+<h2>🔓 TANTANGAN POS 2 TELAH DIBUKA</h2>
+
+<p>
+Selamat.
+</p>
+
+<p>
+Kini kalian dapat mengikuti tantangan Pos 2.
+</p>
+
+<p>
+Untuk mendapatkan tantangan, carilah petani terdekat.
+</p>
+
+<p>
+Petani tersebut akan memberikan instruksi yang harus kalian selesaikan bersama tim.
+</p>
+
+<p>
+Setelah tantangan selesai, kembali ke halaman ini.
+</p>
+
+<button onclick="nextPage(5)">Mulai Tantangan</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+<h2>🌾 TANTANGAN LAPANGAN</h2>
+
+<p>
+Tantangan Pos 2 diberikan langsung oleh petani.
+</p>
+
+<p>
+Selesaikan seluruh instruksi yang diberikan.
+</p>
+
+<p>
+Apakah tantangan telah selesai?
+</p>
+
+<button onclick="nextPage(6)">YES</button>
+<button onclick="belum()">NO</button>
+
+<p id="pesanNo"></p>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+<h2>🔑 VERIFIKASI TANTANGAN</h2>
+
+<p>
+Masukkan kode yang diberikan panitia sebagai bukti bahwa tantangan telah diselesaikan.
+</p>
+
+<input type="text" id="kode" placeholder="Masukkan kode">
+
+<br>
+
+<button onclick="cekKode()">Verifikasi</button>
+
+<p id="hasilKode"></p>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7">
+<h2>🎉 SELAMAT</h2>
+
+<p>Keyword Pos 2:</p>
+
+<div class="keyword">
+TANGGUNG JAWAB
+</div>
+
+<p>
+Simpan keyword ini baik-baik.
+</p>
+
+<button onclick="nextPage(8)">Lihat Petunjuk Pos 3</button>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+<h2>🌳 PETUNJUK POS 3</h2>
+
+<p>
+Ia telah berdiri kokoh selama bertahun-tahun.
+</p>
+
+<p>
+Memberikan keteduhan bagi siapa saja yang singgah.
+</p>
+
+<p>
+Di dekat aliran kecil yang terus mengalir,
+jejak berikutnya menanti.
+</p>
+
+<p>
+🔎 Lanjutkan pencarian.
+</p>
+</div>
+
+</div>
+
+<script>
+
+function nextPage(page){
+document.querySelectorAll('.page').forEach(function(el){
+el.classList.remove('active');
+});
+
+document.getElementById('p'+page).classList.add('active');
+}
+
+function cekIzin(){
+
+let jawaban =
+document.getElementById('izin')
+.value
+.trim()
+.toUpperCase();
+
+if(jawaban === "BANYAK"){
+
+document.getElementById('hasilIzin').innerHTML =
+'<span class="success">✅ Izin diberikan.</span>';
+
+setTimeout(function(){
+nextPage(4);
+},1000);
+
+}else{
+
+document.getElementById('hasilIzin').innerHTML =
+'<span class="error">❌ Jawaban belum tepat.</span>';
+}
+}
+
+function belum(){
+
+document.getElementById('pesanNo').innerHTML =
+'<span class="error">Selesaikan tantangan terlebih dahulu sebelum melanjutkan.</span>';
+}
+
+function cekKode(){
+
+let kode =
+document.getElementById('kode')
+.value
+.trim();
+
+if(kode === "15243"){
+
+document.getElementById('hasilKode').innerHTML =
+'<span class="success">✅ Verifikasi berhasil.</span>';
+
+setTimeout(function(){
+nextPage(7);
+},1000);
+
+}else{
+
+document.getElementById('hasilKode').innerHTML =
+'<span class="error">❌ Kode tidak valid.</span>';
+}
+}
+
+</script>
+
+</body>
+</html>
